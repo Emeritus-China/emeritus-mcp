@@ -13,7 +13,7 @@ This project is an MCP (Microservice Control Platform) server implementation for
 ## Requirements
 
 - Python 3.10 or higher
-- uv package manager
+- uv package manager (for Python dependency management)
 - mcp-sdk >= 1.2.0
 
 ## Installation
@@ -25,7 +25,7 @@ git clone <repository-url>
 cd emeritus-mcp
 ```
 
-2. Create a virtual environment and install dependencies using uv:
+2. Create a virtual environment and install dependencies using uv (Python package manager):
 
 ```bash
 uv venv
@@ -55,7 +55,7 @@ The following environment variables need to be set in the `.env` file:
 
 ### Running the Server
 
-Start the server with:
+Start the server with uvicorn (not to be confused with uv, which is the package manager):
 
 ```bash
 uvicorn emeritus_mcp.main:app --reload
