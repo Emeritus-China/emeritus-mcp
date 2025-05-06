@@ -1,12 +1,14 @@
 # Emeritus MCP Server
 
-This project is an MCP (Microservice Control Platform) server implementation for the Emeritus API. It provides a standardized interface to interact with Emeritus services, including user management and tag operations.
+This project is an MCP (Microservice Control Platform) server implementation for the Emeritus API. It provides a standardized interface to interact with Emeritus services, including user management, tag operations, order management, and leads import.
 
 ## Features
 
 - **Authentication**: Secure token-based authentication with the Emeritus API
 - **User Management**: Create, fetch, and update user information
 - **Tag Management**: Create, manage, and assign tags to users
+- **Order Management**: Fetch order details and lists, including financial records
+- **Leads Management**: Import leads from raw data
 - **MCP API**: RESTful API endpoints with standardized response format
 - **Error Handling**: Comprehensive error handling and reporting
 
@@ -63,12 +65,6 @@ uvicorn emeritus_mcp.main:app --reload
 
 The server will be available at `http://localhost:8000`.
 
-### API Documentation
-
-Once the server is running, you can access the API documentation at:
-
-- Swagger UI: `http://localhost:8000/docs`
-- ReDoc: `http://localhost:8000/redoc`
 
 ### Authentication
 
@@ -99,6 +95,16 @@ Authorization: Bearer <MCP_API_KEY>
 - `POST /api/v5/entity/user/tags/assign`: Assign a tag to a user
 - `GET /api/v5/entity/user/tags/list`: List tags assigned to a user
 
+### Order Endpoints
+
+- `GET /api/v5/entity/order/fetch`: Get details for a specific order
+- `GET /api/v5/entity/order/list`: Get a list of orders
+- `GET /api/v5/entity/order/financial/list`: Get a list of order financial records
+
+### Leads Endpoints
+
+- `POST /api/v5/entity/leads/import`: Import leads from raw data
+
 ## Project Structure
 
 ```
@@ -114,6 +120,11 @@ emeritus-mcp/
 │       │   ├── __init__.py
 │       │   ├── router.py # Main API router
 │       │   └── v5/       # V5 API endpoints
+│       │       ├── __init__.py
+│       │       ├── user.py       # User endpoints
+│       │       ├── tag.py        # Tag endpoints
+│       │       ├── order.py      # Order endpoints
+│       │       └── leads.py      # Leads endpoints
 │       ├── auth/         # Authentication utilities
 │       ├── config/       # Configuration settings
 │       ├── models/       # Data models
