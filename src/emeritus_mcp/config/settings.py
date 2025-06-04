@@ -1,35 +1,42 @@
 """
-Settings configuration for the Emeritus MCP server.
+Configuration settings for the Emeritus MCP server.
 """
+
 import os
 from typing import Optional
-
-from pydantic import Field
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):
-    """Application settings."""
+    """
+    Settings for the Emeritus MCP server.
+    """
     
-    # API settings
-    API_V5_PREFIX: str = "/api/v5"
+    # Emeritus API Configuration
+    emeritus_api_host: str
+    emeritus_user_id: str
+    emeritus_api_secret: str
     
-    # Emeritus API settings
-    EMERITUS_API_HOST: str = Field(..., description="Emeritus API host")
-    EMERITUS_USER_ID: str = Field(..., description="Emeritus User ID")
-    EMERITUS_API_SECRET: str = Field(..., description="Emeritus API Secret")
+    # Debug settings
+    debug: bool = False
     
-    # MCP settings
-    MCP_API_KEY: Optional[str] = Field(None, description="MCP API Key")
-    
-    # Server settings
-    DEBUG: bool = Field(False, description="Debug mode")
-    
-    model_config = SettingsConfigDict(
-        env_file=".env",
-        env_file_encoding="utf-8",
-        case_sensitive=True,
-    )
+    class Config:
+        env_file = ".env"
+        env_file_encoding = "utf-8"
 
 
-settings = Settings()
+# Global settings instance
+_settings: Optional[Settings] = None
+
+
+def get_settings() -> Settings:
+    """
+    Get the global settings instance.
+    
+    Returns:
+        Settings: The settings instance.
+    """
+    global _settings
+    if _settings is None:
+        _settings = Settings()
+    return _settings

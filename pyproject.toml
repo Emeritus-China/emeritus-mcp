@@ -5,17 +5,16 @@ build-backend = "hatchling.build"
 [project]
 name = "emeritus-mcp"
 version = "0.1.0"
-description = "MCP server implementation for Emeritus API"
+description = "Model Context Protocol server for Emeritus API integration"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
 dependencies = [
-    "fastapi>=0.95.0",
-    "uvicorn>=0.21.1",
-    "pydantic>=2.0.0",
+    "mcp>=1.0.0",
     "httpx>=0.24.0",
     "python-dotenv>=1.0.0",
-    "mcp-sdk>=1.2.0",
+    "pydantic>=2.0.0",
+    "anyio>=3.0.0",
 ]
 
 [project.optional-dependencies]
